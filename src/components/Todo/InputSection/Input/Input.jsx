@@ -8,11 +8,11 @@ class Input extends React.Component {
     return (
         <div className={styles['todo__input']}>
           <div className={[styles['input-field'], styles.col].join(' ')}>
-            <input type='text'/> {/* temporary solution */}
+            <input type='text' value={this.props.inputElementValue} onChange={this.props.getValue}/>
           </div>
           <div className={styles['input-buttons']}>
-            <InputButtons value='Add New'/>
-            <InputButtons value='Delete All'/>
+            <InputButtons value='Add New' removeAddEvents={this.props.addValue}/>
+            <InputButtons value='Delete All' removeAddEvents={this.props.removeAll}/>
           </div>
         </div>
     )

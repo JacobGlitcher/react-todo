@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ListItem from "../listItem/ListItem";
+import ListItem from "../ListItem/ListItem";
 import styles from "./List.module.scss";
 
 class List extends React.Component {
@@ -8,7 +8,7 @@ class List extends React.Component {
     return (
         <ul className={styles['list']}>
           <div className={styles['list__inner']}>
-            <ListItem/>
+            <ListItem toDos={this.props.toDos}/>
           </div>
         </ul>
     )

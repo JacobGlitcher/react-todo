@@ -1,18 +1,67 @@
 import React from 'react';
 
 import styles from './Todo.module.scss';
-import List from "./ListSection/list/List";
+import List from "./ListSection/List/List";
 import Input from "./InputSection/Input/Input";
+import EmptyList from "./ListSection/EmtyList/EmptyList";
 
-class App extends React.Component {
+class Todo extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      toDos: [],
+      userInputVal: '',
+      inputElementValue: '',
+    }
+  }
+
+  getInputValue = (event) => {
+    if (event.target.value.length <= 50) {
+      this.setState({
+        userInputVal: event.target.value.trim(),
+        inputElementValue: event.target.value,
+      });
+    }
+  }
+
+  addInputValue = () => {
+    // add new items to List
+    if (this.state.userInputVal) {
+      let newToDos = this.state.toDos;
+
+      newToDos.push(this.state.userInputVal);
+
+      this.setState({
+        toDos: newToDos
+      });
+    }
+
+    // remove any value from input after clicked "add button"
+    this.setState({
+      inputElementValue: '',
+    });
+  }
+
+  removeAllToDos = () => {
+    this.setState({
+      toDos: []
+    });
+  }
+
   render() {
     return (
         <div className={styles.todo}>
           <div className={styles['todo__inner']}>
             <h1 className={styles['todo__title']}>Enter Your TODO Tasks</h1>
             <div className={styles['todo__main']}>
-              <Input/>
-              <List/>
+              <Input
+                  getValue={this.getInputValue}
+                  addValue={this.addInputValue}
+                  removeAll={this.removeAllToDos}
+                  inputElementValue={this.state.inputElementValue}
+              />
+              {this.state.toDos.length ?
+                  <List toDos={this.state.toDos}/> : <EmptyList/>}
             </div>
           </div>
         </div>
@@ -20,4 +69,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default Todo;
