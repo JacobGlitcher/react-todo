@@ -1,1 +1,19 @@
 @import './base/reset';
+@import './components/buttons';
+
+body {
+  font-family: 'Roboto Mono', monospace;
+  background-color: #7ba8b6;
+}
+
+.App, .wrapper {
+  height: 100%;
+}
+
+.wrapper {
+  padding: 40px 16px;
+}
+
+.test {
+  background-color: red;
+}
