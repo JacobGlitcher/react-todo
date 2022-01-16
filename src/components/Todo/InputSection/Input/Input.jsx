@@ -8,7 +8,12 @@ class Input extends React.Component {
     return (
         <div className={styles['todo__input']}>
           <div className={[styles['input-field'], styles.col].join(' ')}>
-            <input type='text' value={this.props.inputElementValue} onChange={this.props.getValue}/>
+            <input
+                type='text'
+                value={this.props.inputElementValue}
+                onChange={this.props.getValue}
+                onKeyPress={(event) => event.key === 'Enter' ? this.props.addValue() : null}
+            />
           </div>
           <div className={styles['input-buttons']}>
             <InputButtons value='Add New' removeAddEvents={this.props.addValue}/>

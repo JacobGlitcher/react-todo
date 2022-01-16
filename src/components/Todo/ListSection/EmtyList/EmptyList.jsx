@@ -6,7 +6,7 @@ class EmptyList extends React.Component {
   render() {
     return (
         <div className={styles['empty-list']}>
-          Add a ToDo Item
+          Add a todo item
         </div>
     )
   }

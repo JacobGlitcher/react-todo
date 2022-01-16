@@ -36,8 +36,9 @@ class Todo extends React.Component {
       });
     }
 
-    // remove any value from input after clicked "add button"
+    // remove any text from input after clicked "add button"
     this.setState({
+      userInputVal: '',
       inputElementValue: '',
     });
   }
@@ -45,6 +46,16 @@ class Todo extends React.Component {
   removeAllToDos = () => {
     this.setState({
       toDos: []
+    });
+  }
+
+  removeParticularToDo = (itemKey) => {
+    let newToDos = this.state.toDos.filter((item, index) => {
+      return itemKey !== index;
+    });
+
+    this.setState({
+      toDos: newToDos
     });
   }
 
@@ -60,8 +71,12 @@ class Todo extends React.Component {
                   removeAll={this.removeAllToDos}
                   inputElementValue={this.state.inputElementValue}
               />
+
               {this.state.toDos.length ?
-                  <List toDos={this.state.toDos}/> : <EmptyList/>}
+                  <List
+                      toDos={this.state.toDos}
+                      removeParticularToDo={this.removeParticularToDo}
+                  /> : <EmptyList/>}
             </div>
           </div>
         </div>
