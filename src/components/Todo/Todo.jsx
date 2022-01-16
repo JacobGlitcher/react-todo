@@ -1,7 +1,7 @@
 import React from 'react';
 
 import styles from './Todo.module.scss';
-import List from "./ListSection/List";
+import List from "./ListSection/list/List";
 import Input from "./InputSection/Input/Input";
 
 class App extends React.Component {
