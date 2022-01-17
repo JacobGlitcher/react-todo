@@ -15,6 +15,17 @@ class Todo extends React.Component {
     }
   }
 
+  componentDidMount() {
+    const toDosFromStorage = localStorage.getItem('toDosInfo');
+    const parsedToDosFromStorage = toDosFromStorage ? JSON.parse(localStorage.getItem('toDosInfo')) : [];
+
+    this.setState({toDos: parsedToDosFromStorage})
+  }
+
+  setToLocalStorage = (todoItemList) => {
+    localStorage.setItem('toDosInfo', JSON.stringify(todoItemList));
+  }
+
   getInputValue = (event) => {
     if (event.target.value.length <= 50) {
       this.setState({
@@ -35,6 +46,8 @@ class Todo extends React.Component {
       this.setState({
         toDos: newToDos
       });
+
+      this.setToLocalStorage(newToDos);
     }
 
     // remove any text from input after clicked "add button"
@@ -48,6 +61,8 @@ class Todo extends React.Component {
     this.setState({
       toDos: []
     });
+
+    this.setToLocalStorage([]);
   }
 
   removeParticularToDo = (itemKey) => {
@@ -58,6 +73,8 @@ class Todo extends React.Component {
     this.setState({
       toDos: newToDos
     });
+
+    this.setToLocalStorage(newToDos);
   }
 
   checkItem = (itemKey) => {
@@ -68,6 +85,8 @@ class Todo extends React.Component {
     this.setState({
       toDos: newCheckList
     })
+
+    this.setToLocalStorage(newCheckList);
   }
 
   render() {
