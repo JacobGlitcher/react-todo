@@ -7,8 +7,22 @@
   padding: 10px;
   border-radius: 6px;
   font-size: 17px;
+  transition: all .15s linear;
   &:last-child {
     margin-bottom: 0;
+  }
+
+  &.active {
+    background-color: #666;
+    .list__item-checkbox {
+      &:hover {
+        background-color: unset;
+      }
+
+      i {
+        transform: scale(1);
+      }
+    }
   }
 
   &-checkbox {
@@ -25,12 +39,6 @@
     transition: all .15s linear;
     &:hover {
       background-color: #f0f0f0;
-    }
-
-    &.active {
-      i {
-        transform: scale(1);
-      }
     }
     
     i {

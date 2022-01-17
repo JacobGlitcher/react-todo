@@ -28,8 +28,9 @@ class Todo extends React.Component {
     // add new items to List
     if (this.state.userInputVal) {
       let newToDos = this.state.toDos;
+      let userInput = this.state.userInputVal
 
-      newToDos.push(this.state.userInputVal);
+      newToDos.push({info: userInput, isDone: false});
 
       this.setState({
         toDos: newToDos
@@ -59,11 +60,21 @@ class Todo extends React.Component {
     });
   }
 
+  checkItem = (itemKey) => {
+    let newCheckList = this.state.toDos.map((item, index) => {
+      return itemKey === index ? { ...item, isDone: !item.isDone} : item
+    });
+
+    this.setState({
+      toDos: newCheckList
+    })
+  }
+
   render() {
     return (
         <div className={styles.todo}>
           <div className={styles['todo__inner']}>
-            <h1 className={styles['todo__title']}>Enter Your TODO Tasks</h1>
+            <h1 className={styles['todo__title']}>TODO Item List</h1>
             <div className={styles['todo__main']}>
               <Input
                   getValue={this.getInputValue}
@@ -76,6 +87,7 @@ class Todo extends React.Component {
                   <List
                       toDos={this.state.toDos}
                       removeParticularToDo={this.removeParticularToDo}
+                      checkItem={this.checkItem}
                   /> : <EmptyList/>}
             </div>
           </div>
